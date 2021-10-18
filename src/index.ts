@@ -22,6 +22,8 @@ bot.on('new_chat_members', (ctx) => {
         })
     }catch (e) {
         console.log(e);
+        // @ts-ignore
+        ctx.telegram.sendMessage(process.env.DEBUG_CHAT_ID, e);
     }
 
 
@@ -44,6 +46,8 @@ bot.command('/reguser', (ctx) => {
         }
     }catch (e) {
         console.log(e);
+        // @ts-ignore
+        ctx.telegram.sendMessage(process.env.DEBUG_CHAT_ID, e);
     }
 
 });
@@ -58,9 +62,11 @@ bot.on('message', async (ctx) => {
                 const text = getTextAfterRegexPattern(messageText);
                 const users = database.getAllUsers(ctx.message.chat.id);
                 const user = users[Math.floor(Math.random() * users.length)];
-                await bot.telegram.sendMessage(ctx.message.chat.id, '@' + user.id + "сегодня " + text);
+                await bot.telegram.sendMessage(ctx.message.chat.id, '@' + user.id + " сегодня " + text);
             }catch (e) {
                 console.log(e);
+                // @ts-ignore
+                ctx.telegram.sendMessage(process.env.DEBUG_CHAT_ID, e);
             }
 
         }
