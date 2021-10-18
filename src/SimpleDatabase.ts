@@ -1,4 +1,3 @@
-import {config} from "dotenv";
 import * as fs from "fs/promises";
 
 
@@ -14,7 +13,7 @@ interface Chat {
     users: User[]
 }
 
-const chats: Chat[] = []
+let chats: Chat[] = []
 
 
 // @ts-ignore
@@ -41,8 +40,9 @@ export const database = {
         try {
             let chat = chats.filter(chat => {return chat.chatId == chatid})[0];
 
-            let user = chat.users.filter(user => {return user.id == userid})[0];
-            return user;
+            return chat.users.filter(user => {
+                return user.id == userid
+            })[0];
         } catch(e) {
             console.log(e);
             return undefined
@@ -69,7 +69,7 @@ export const database = {
     loadDatabase: async (): Promise<void> => {
         try {
             let dbInString = await fs.readFile(__dirname + databaseFileName);
-            chats.push(JSON.parse(dbInString.toString()));
+            chats = (JSON.parse(dbInString.toString()));
 
             console.log('Database loaded successfully')
             console.log('Database value:\n\n' + JSON.stringify(chats));
@@ -84,6 +84,7 @@ export const database = {
                 // @ts-ignore
                 return chats[0][0].users;
             }
+            return chat.users;
         }
 
 }

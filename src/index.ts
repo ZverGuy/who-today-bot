@@ -58,7 +58,7 @@ bot.on('message', async (ctx) => {
                 const text = getTextAfterRegexPattern(messageText);
                 const users = database.getAllUsers(ctx.message.chat.id);
                 const user = users[Math.floor(Math.random() * users.length)];
-                await bot.telegram.sendMessage(ctx.message.chat.id, '@' + user.id + " " + text);
+                await bot.telegram.sendMessage(ctx.message.chat.id, '@' + user.id + "сегодня " + text);
             }catch (e) {
                 console.log(e);
             }
