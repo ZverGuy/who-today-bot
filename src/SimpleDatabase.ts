@@ -51,7 +51,7 @@ export const database = {
 
     saveChanges: async (): Promise<void> => {
         try {
-            let filepath = __dirname + databaseFileName;
+            let filepath = __filename + databaseFileName;
             if (await checkFileExistsSync(filepath)) {
                 fs.rm(filepath)
                     .then(() => fs.writeFile(filepath, JSON.stringify(chats)))
@@ -68,7 +68,7 @@ export const database = {
 
     loadDatabase: async (): Promise<void> => {
         try {
-            let dbInString = await fs.readFile(__dirname + databaseFileName);
+            let dbInString = await fs.readFile(__filename + databaseFileName);
             chats = (JSON.parse(dbInString.toString()));
 
             console.log('Database loaded successfully')

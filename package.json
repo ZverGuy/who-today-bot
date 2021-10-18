@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "run": "tsc && node dist/index.js"
+    "run": "tsc && node dist/index.js",
+    "build:singlefile": "tsc && nexe -i \"dist/index.js\" -r \"public/**/*.html\" -o \"dist/myApp.exe\" -t x64-14.15.3"
   },
   "author": "",
   "license": "ISC",
